@@ -1,4 +1,6 @@
-﻿namespace Catalog.API.Products.CreateProduct
+﻿using FastEndpoints;
+
+namespace Catalog.API.Products.CreateProduct
 {
     public record CreateProductRequest(
         string Name,
@@ -10,26 +12,21 @@
 
     public record CreateProductResponse(Guid Id);
 
-    public class CreateProductEndpoint : ICarterModule
+    public class CreateProductEndpoint(ISender sender)
+        : Endpoint<CreateProductRequest, CreateProductResponse>
     {
-        public void AddRoutes(IEndpointRouteBuilder app)
+        public override void Configure()
         {
-            app.MapPost(
-                    "/products",
-                    async (CreateProductRequest request, ISender sender) =>
-                    {
-                        var command = request.Adapt<CreateProductCommand>();
-                        var result = await sender.Send(command);
-                        var response = result.Adapt<CreateProductResponse>();
+            Post("/products");
+            AllowAnonymous();
+        }
 
-                        return Results.Created($"/products/{response.Id}", response);
-                    }
-                )
-                .WithName("CreateProduct")
-                .Produces<CreateProductResponse>(StatusCodes.Status201Created)
-                .ProducesProblem(StatusCodes.Status400BadRequest)
-                .WithSummary("Create Product")
-                .WithDescription("Create Product");
+        public override async Task HandleAsync(CreateProductRequest req, CancellationToken ct)
+        {
+            var command = req.Adapt<CreateProductCommand>();
+            var result = await sender.Send(command);
+            var response = result.Adapt<CreateProductResponse>();
+            await SendAsync(response, StatusCodes.Status201Created);
         }
     }
 }
