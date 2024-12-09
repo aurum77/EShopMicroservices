@@ -1,9 +1,10 @@
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddMediatR(config =>
+{
+    config.RegisterServicesFromAssembly(typeof(Program).Assembly);
+});
+builder.Services.AddCarter();
 
-// Add services to DI container
 var app = builder.Build();
-
-// Configure HTTP request pipeline
-app.MapGet("/", () => "Hello World!");
-
+app.MapCarter();
 app.Run();
