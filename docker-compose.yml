@@ -1,0 +1,6 @@
+services:
+  catalogdb:
+    image: postgres:alpine
+
+volumes:
+  postgres_catalog:
