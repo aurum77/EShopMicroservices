@@ -10,12 +10,19 @@ public class GetProductsEndpoint(ISender sender) : EndpointWithoutRequest<GetPro
     {
         Get("/products");
         AllowAnonymous();
+        Description(b =>
+            b.WithName("GetProducts")
+                .Produces<GetProductsResponse>(StatusCodes.Status200OK)
+                .ProducesProblem(StatusCodes.Status400BadRequest)
+                .WithSummary("Get Products")
+                .WithDescription("Get Products")
+        );
     }
 
     public override Task HandleAsync(CancellationToken ct)
     {
         var result = sender.Send(new GetProductsQuery());
         var response = result.Result.Adapt<GetProductsResponse>();
-        return SendAsync(response, StatusCodes.Status302Found);
+        return SendAsync(response, StatusCodes.Status200OK);
     }
 }

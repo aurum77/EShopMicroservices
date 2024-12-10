@@ -19,6 +19,13 @@ public class CreateProductEndpoint(ISender sender)
     {
         Post("/products");
         AllowAnonymous();
+        Description(b =>
+            b.WithName("CreateProduct")
+                .Produces<CreateProductResponse>(StatusCodes.Status201Created)
+                .ProducesProblem(StatusCodes.Status400BadRequest)
+                .WithSummary("Create Product")
+                .WithDescription("Create Product")
+        );
     }
 
     public override async Task HandleAsync(CreateProductRequest req, CancellationToken ct)
