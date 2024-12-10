@@ -1,0 +1,161 @@
+{
+  "name": "EShopMicroservices",
+  "version": "1",
+  "items": [
+    {
+      "type": "folder",
+      "name": "Catalog",
+      "items": [
+        {
+          "type": "http",
+          "name": "CreateProduct",
+          "seq": 1,
+          "request": {
+            "url": "{{catalog_url}}/products",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"Name\": \"New Product A\",\n  \"Category\": [\n    \"c1\",\n    \"c2\"\n  ],\n  \"Description\": \"Description Product A\",\n  \"ImageFile\": \"ImageFile Product A\",\n  \"Price\": 199\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "GetProducts",
+          "seq": 2,
+          "request": {
+            "url": "{{catalog_url}}/products",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "GetProductById",
+          "seq": 3,
+          "request": {
+            "url": "{{catalog_url}}",
+            "method": "GET",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "Basket"
+    },
+    {
+      "type": "folder",
+      "name": "Discount"
+    },
+    {
+      "type": "folder",
+      "name": "Ordering"
+    }
+  ],
+  "activeEnvironmentUid": "Qe7qNptcwzW3ei8i1EbG5",
+  "environments": [
+    {
+      "variables": [
+        {
+          "name": "catalog_url",
+          "value": "https://localhost:5050",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "basket_url",
+          "value": "https://localhost:5051",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "order_url",
+          "value": "https://localhost:5053",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        }
+      ],
+      "name": "Development"
+    },
+    {
+      "variables": [
+        {
+          "name": "catalog_url",
+          "value": "https://localhost:6060",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "basket_url",
+          "value": "https://localhost:6061",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "order_url",
+          "value": "https://localhost:6063",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        }
+      ],
+      "name": "Docker"
+    }
+  ],
+  "brunoConfig": {
+    "version": "1",
+    "name": "EShopMicroservices",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ]
+  }
+}
