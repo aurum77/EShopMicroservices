@@ -22,11 +22,11 @@ public class GetProductByIdEndpoint(ISender sender)
         );
     }
 
-    public override Task HandleAsync(GetProductByIdRequest req, CancellationToken ct)
+    public override async Task HandleAsync(GetProductByIdRequest req, CancellationToken ct)
     {
         var query = new GetProductByIdQuery(req.Id);
         var result = sender.Send(query).Result;
         var response = result.Adapt<GetProductByIdResponse>();
-        return SendAsync(response, StatusCodes.Status200OK);
+        await SendAsync(response, StatusCodes.Status200OK, ct);
     }
 }

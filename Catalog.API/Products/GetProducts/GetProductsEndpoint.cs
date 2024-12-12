@@ -19,11 +19,11 @@ public class GetProductsEndpoint(ISender sender) : EndpointWithoutRequest<GetPro
         );
     }
 
-    public override Task HandleAsync(CancellationToken ct)
+    public override async Task HandleAsync(CancellationToken ct)
     {
         var query = new GetProductsQuery();
         var result = sender.Send(query).Result;
         var response = result.Adapt<GetProductsResponse>();
-        return SendAsync(response, StatusCodes.Status200OK);
+        await SendAsync(response, StatusCodes.Status200OK, ct);
     }
 }

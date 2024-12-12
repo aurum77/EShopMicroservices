@@ -33,6 +33,6 @@ public class CreateProductEndpoint(ISender sender)
         var command = req.Adapt<CreateProductCommand>();
         var result = sender.Send(command).Result;
         var response = result.Adapt<CreateProductResponse>();
-        await SendAsync(response, StatusCodes.Status201Created);
+        await SendAsync(response, StatusCodes.Status201Created, ct);
     }
 }
