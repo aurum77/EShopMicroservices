@@ -10,7 +10,7 @@ public record CreateProductCommand(
 
 public record CreateProductResult(Guid Id);
 
-internal class CreateProductCommandHandler(IDocumentSession session)
+internal class CreateProductCommandHandler(IDocumentSession session, ILogger<CreateProductCommandHandler> logger)
     : ICommandHandler<CreateProductCommand, CreateProductResult>
 {
     public async Task<CreateProductResult> Handle(
@@ -18,6 +18,7 @@ internal class CreateProductCommandHandler(IDocumentSession session)
         CancellationToken cancellationToken
     )
     {
+        logger.LogInformation("GetProductByIdQueryHandler.Handle was called");
         // Business logic to create a product
         var product = new Product
         {

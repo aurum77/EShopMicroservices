@@ -12,6 +12,7 @@ builder
         opts.Connection(builder.Configuration.GetConnectionString("PostgreSQL")!);
     })
     .UseLightweightSessions();
+builder.Services.AddLogging();
 
 var app = builder.Build();
 app.UseFastEndpoints();
