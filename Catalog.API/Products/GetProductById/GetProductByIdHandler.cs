@@ -4,8 +4,18 @@ public record GetProductByIdQuery(Guid Id) : IQuery<GetProductByIdResult>;
 
 public record GetProductByIdResult(Product Product);
 
-internal class GetProductByIdQueryHandler(IDocumentSession session, ILogger<GetProductByIdQueryHandler> logger)
-    : IQueryHandler<GetProductByIdQuery, GetProductByIdResult>
+public class GetProductByIdQueryValidator : AbstractValidator<GetProductByIdQuery>
+{
+    public GetProductByIdQueryValidator()
+    {
+        RuleFor(x => x.Id).NotEmpty().WithMessage("Product Id must not be empty");
+    }
+}
+
+internal class GetProductByIdQueryHandler(
+    IDocumentSession session,
+    ILogger<GetProductByIdQueryHandler> logger
+) : IQueryHandler<GetProductByIdQuery, GetProductByIdResult>
 {
     public async Task<GetProductByIdResult> Handle(
         GetProductByIdQuery query,
