@@ -1,9 +1,13 @@
+using BuildingBlocks.PipelineBehaviors;
 using FastEndpoints;
+
+var assembly = typeof(Program).Assembly;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMediatR(config =>
 {
-    config.RegisterServicesFromAssembly(typeof(Program).Assembly);
+    config.RegisterServicesFromAssembly(assembly);
+    config.AddOpenBehavior(typeof(ValidationBehavior<,>));
 });
 builder.Services.AddFastEndpoints();
 builder
@@ -13,6 +17,7 @@ builder
     })
     .UseLightweightSessions();
 builder.Services.AddLogging();
+builder.Services.AddValidatorsFromAssembly(assembly);
 
 var app = builder.Build();
 app.UseFastEndpoints();
