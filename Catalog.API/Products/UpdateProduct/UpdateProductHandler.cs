@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.Web;
-
-namespace Catalog.API.Products.UpdateProduct;
+﻿namespace Catalog.API.Products.UpdateProduct;
 
 public record UpdateProductCommand(
     Guid Id,
@@ -11,7 +9,7 @@ public record UpdateProductCommand(
     decimal Price
 ) : ICommand<UpdateProductResult>;
 
-public record UpdateProductResult(bool Success);
+public record UpdateProductResult(bool IsSuccess);
 
 public class UpdateProductCommandHandler(IDocumentSession session, ILogger<UpdateProductCommandHandler> logger)
     : ICommandHandler<UpdateProductCommand, UpdateProductResult>

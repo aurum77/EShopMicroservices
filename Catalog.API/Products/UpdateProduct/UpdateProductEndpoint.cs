@@ -32,7 +32,7 @@ public class UpdateProductEndpoint(ISender sender)
 
     public override async Task HandleAsync(UpdateProductRequest req, CancellationToken ct)
     {
-        var command = req.Adapt<UpdateProductRequest>();
+        var command = req.Adapt<UpdateProductCommand>();
         var result = await sender.Send(command);
         var response = result.Adapt<UpdateProductResponse>();
         await SendAsync(response, StatusCodes.Status200OK, ct);
