@@ -1,3 +1,4 @@
+using BuildingBlocks.Exceptions.Handler;
 using BuildingBlocks.PipelineBehaviors;
 using FastEndpoints;
 
@@ -18,7 +19,9 @@ builder
     .UseLightweightSessions();
 builder.Services.AddLogging();
 builder.Services.AddValidatorsFromAssembly(assembly);
+builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
 var app = builder.Build();
 app.UseFastEndpoints();
+app.UseExceptionHandler(options => { });
 app.Run();
