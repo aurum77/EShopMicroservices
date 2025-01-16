@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using BuildingBlocks.CQRS;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -8,7 +7,8 @@ namespace BuildingBlocks.PipelineBehaviors;
 public class LoggingBehavior<TRequest, TResponse>(
     ILogger<LoggingBehavior<TRequest, TResponse>> logger
 ) : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : ICommand<TResponse>
+    where TRequest :notnull, IRequest<TResponse>
+    where TResponse : notnull
 {
     public async Task<TResponse> Handle(
         TRequest request,
@@ -42,7 +42,7 @@ public class LoggingBehavior<TRequest, TResponse>(
         }
 
         logger.LogInformation(
-            "[END] handled Request {Request} with Response {Response} - RequestData {RequestData}",
+            "[END] handled Request {Request} with Response {Response}",
             typeof(TRequest).Name,
             typeof(TResponse).Name
         );
