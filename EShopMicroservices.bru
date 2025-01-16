@@ -4,6 +4,14 @@
   "items": [
     {
       "type": "folder",
+      "name": "Discount"
+    },
+    {
+      "type": "folder",
+      "name": "Basket"
+    },
+    {
+      "type": "folder",
       "name": "Catalog",
       "items": [
         {
@@ -17,7 +25,100 @@
             "params": [],
             "body": {
               "mode": "json",
-              "json": "{\n  \"Name\": \"New Product A\",\n  \"Category\": [\n    \"c1\",\n    \"c2\"\n  ],\n  \"Description\": \"Description Product A\",\n  \"ImageFile\": \"ImageFile Product A\",\n  \"Price\": 199\n}",
+              "json": "{\n  \"Name\": \"New Product A\",\n  \"Category\": [\n    \"c1\",\n    \"c2\",\n    \"c3\"\n  ],\n  \"Description\": \"Description Product A\",\n  \"ImageFile\": \"ImageFile Product A\",\n  \"Price\": 199\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "DeleteProduct",
+          "seq": 5,
+          "request": {
+            "url": "{{catalog_url}}/products/:id",
+            "method": "DELETE",
+            "headers": [],
+            "params": [
+              {
+                "name": "id",
+                "value": "0193abca-9273-476f-a038-95ab314fec64",
+                "type": "path",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "GetProductByCategory",
+          "seq": 4,
+          "request": {
+            "url": "{{catalog_url}}/products/by-category/:category",
+            "method": "GET",
+            "headers": [],
+            "params": [
+              {
+                "name": "category",
+                "value": "c3",
+                "type": "path",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "GetProductById",
+          "seq": 3,
+          "request": {
+            "url": "{{catalog_url}}/products/:productId",
+            "method": "GET",
+            "headers": [],
+            "params": [
+              {
+                "name": "productId",
+                "value": "0193abca-9273-476f-a038-95ab314fec64",
+                "type": "path",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "none",
               "formUrlEncoded": [],
               "multipartForm": []
             },
@@ -57,11 +158,11 @@
         },
         {
           "type": "http",
-          "name": "GetProductById",
-          "seq": 3,
+          "name": "UpdateProduct",
+          "seq": 6,
           "request": {
-            "url": "{{catalog_url}}",
-            "method": "GET",
+            "url": "{{catalog_url}}/products",
+            "method": "PUT",
             "headers": [],
             "params": [],
             "body": {
@@ -83,18 +184,10 @@
     },
     {
       "type": "folder",
-      "name": "Basket"
-    },
-    {
-      "type": "folder",
-      "name": "Discount"
-    },
-    {
-      "type": "folder",
       "name": "Ordering"
     }
   ],
-  "activeEnvironmentUid": "Qe7qNptcwzW3ei8i1EbG5",
+  "activeEnvironmentUid": "PMKDJ08Fp9jxrcT3KRAJ4",
   "environments": [
     {
       "variables": [
