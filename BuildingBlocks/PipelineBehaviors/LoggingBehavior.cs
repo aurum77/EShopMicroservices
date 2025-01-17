@@ -7,7 +7,7 @@ namespace BuildingBlocks.PipelineBehaviors;
 public class LoggingBehavior<TRequest, TResponse>(
     ILogger<LoggingBehavior<TRequest, TResponse>> logger
 ) : IPipelineBehavior<TRequest, TResponse>
-    where TRequest :notnull, IRequest<TResponse>
+    where TRequest : notnull, IRequest<TResponse>
     where TResponse : notnull
 {
     public async Task<TResponse> Handle(
@@ -42,9 +42,10 @@ public class LoggingBehavior<TRequest, TResponse>(
         }
 
         logger.LogInformation(
-            "[END] handled Request {Request} with Response {Response}",
+            "[END] handled Request {Request} with Response {Response} in {timeElapsed}",
             typeof(TRequest).Name,
-            typeof(TResponse).Name
+            typeof(TResponse).Name,
+            timeElapsed
         );
 
         return await next();
