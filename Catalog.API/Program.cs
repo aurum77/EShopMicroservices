@@ -18,6 +18,12 @@ builder
         opts.Connection(builder.Configuration.GetConnectionString("PostgreSQL")!);
     })
     .UseLightweightSessions();
+
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.InitializeMartenWith<CatalogInitialData>();
+}
+
 builder.Services.AddLogging();
 builder.Services.AddValidatorsFromAssembly(assembly);
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
