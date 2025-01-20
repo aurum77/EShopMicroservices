@@ -29,6 +29,11 @@ builder.Services.AddValidatorsFromAssembly(assembly);
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
 var app = builder.Build();
+app.UseHealthChecks("/health",
+    new HealthCheckOptions
+    {
+        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+    });
 app.UseFastEndpoints();
 app.UseExceptionHandler(options => { });
 app.Run();
