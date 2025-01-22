@@ -13,6 +13,7 @@ builder.Services.AddMediatR(config =>
     config.AddOpenBehavior(typeof(ValidationBehavior<,>));
     config.AddOpenBehavior(typeof(LoggingBehavior<,>));
 });
+builder.Services.AddHealthChecks();
 builder.Services.AddFastEndpoints();
 builder
     .Services.AddMarten(opts =>
