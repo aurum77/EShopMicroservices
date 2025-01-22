@@ -1,6 +1,8 @@
 using BuildingBlocks.Exceptions.Handler;
 using BuildingBlocks.PipelineBehaviors;
 using FastEndpoints;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 var assembly = typeof(Program).Assembly;
 
@@ -29,11 +31,10 @@ builder.Services.AddValidatorsFromAssembly(assembly);
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
 var app = builder.Build();
-app.UseHealthChecks("/health",
-    new HealthCheckOptions
-    {
-        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-    });
+app.UseHealthChecks(
+    "/health",
+    new HealthCheckOptions { ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse }
+);
 app.UseFastEndpoints();
 app.UseExceptionHandler(options => { });
 app.Run();
