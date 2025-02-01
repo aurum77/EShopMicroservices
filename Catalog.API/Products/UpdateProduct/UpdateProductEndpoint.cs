@@ -18,7 +18,7 @@ public class UpdateProductEndpoint(ISender sender)
 {
     public override void Configure()
     {
-        Put("/products/{id}");
+        Put("/products");
         AllowAnonymous();
         Description(b =>
             b.WithName("UpdateProduct")
