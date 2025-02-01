@@ -2,9 +2,20 @@
 
 namespace Catalog.API.Products.GetProducts;
 
+public record GetProductsRequest()
+{
+    // these must have public access modifier in
+    // order to use [QueryParam] binding.
+    [QueryParam]
+    public int PageNumber { get; set; }
+
+    [QueryParam]
+    public int PageSize { get; set; }
+};
+
 public record GetProductsResponse(IEnumerable<Product> Products);
 
-public class GetProductsEndpoint(ISender sender) : EndpointWithoutRequest<GetProductsResponse>
+public class GetProductsEndpoint(ISender sender) : Endpoint<GetProductsRequest, GetProductsResponse>
 {
     public override void Configure()
     {
@@ -19,9 +30,9 @@ public class GetProductsEndpoint(ISender sender) : EndpointWithoutRequest<GetPro
         );
     }
 
-    public override async Task HandleAsync(CancellationToken ct)
+    public override async Task HandleAsync(GetProductsRequest req, CancellationToken ct)
     {
-        var query = new GetProductsQuery();
+        var query = req.Adapt<GetProductsQuery>();
         var result = sender.Send(query).Result;
         var response = result.Adapt<GetProductsResponse>();
         await SendAsync(response, StatusCodes.Status200OK, ct);
