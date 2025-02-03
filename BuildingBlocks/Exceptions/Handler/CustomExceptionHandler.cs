@@ -22,30 +22,26 @@ public class CustomExceptionHandler(ILogger<CustomExceptionHandler> logger) : IE
 
         (string Detail, string Title, int StatusCode) details = exception switch
         {
-            BadRequestException
-                => (
-                    exception.Message,
-                    exception.GetType().Name,
-                    httpContext.Response.StatusCode = StatusCodes.Status400BadRequest
-                ),
-            InternalServerException
-                => (
-                    exception.Message,
-                    exception.GetType().Name,
-                    httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError
-                ),
-            NotFoundException
-                => (
-                    exception.Message,
-                    exception.GetType().Name,
-                    httpContext.Response.StatusCode = StatusCodes.Status404NotFound
-                ),
-            _
-                => (
-                    exception.Message,
-                    exception.GetType().Name,
-                    httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError
-                )
+            BadRequestException => (
+                exception.Message,
+                exception.GetType().Name,
+                httpContext.Response.StatusCode = StatusCodes.Status400BadRequest
+            ),
+            InternalServerException => (
+                exception.Message,
+                exception.GetType().Name,
+                httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError
+            ),
+            NotFoundException => (
+                exception.Message,
+                exception.GetType().Name,
+                httpContext.Response.StatusCode = StatusCodes.Status404NotFound
+            ),
+            _ => (
+                exception.Message,
+                exception.GetType().Name,
+                httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError
+            ),
         };
 
         var problemDetails = new ProblemDetails
@@ -53,7 +49,7 @@ public class CustomExceptionHandler(ILogger<CustomExceptionHandler> logger) : IE
             Title = details.Title,
             Detail = details.Detail,
             Status = details.StatusCode,
-            Instance = httpContext.Request.Path
+            Instance = httpContext.Request.Path,
         };
 
         problemDetails.Extensions.Add("traceId", httpContext.TraceIdentifier);
