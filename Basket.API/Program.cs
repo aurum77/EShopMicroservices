@@ -1,8 +1,9 @@
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Basket.API.Models;
 using BuildingBlocks.Exceptions.Handler;
 using BuildingBlocks.PipelineBehaviors;
 using FastEndpoints;
 using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 var assembly = typeof(Program).Assembly;
 
@@ -16,10 +17,13 @@ builder.Services.AddMediatR(config =>
 });
 builder.Services.AddHealthChecks();
 builder.Services.AddFastEndpoints();
-builder.Services.AddMarten(opts =>
-{
-    opts.Connection(builder.Configuration.GetConnectionString("PostgreSQL")!);
-}).UseLightweightSessions();
+builder
+    .Services.AddMarten(opts =>
+    {
+        opts.Connection(builder.Configuration.GetConnectionString("PostgreSQL")!);
+        opts.Schema.For<ShoppingCart>().Identity(x => x.Username);
+    })
+    .UseLightweightSessions();
 
 builder.Services.AddLogging();
 builder.Services.AddValidatorsFromAssembly(assembly);
