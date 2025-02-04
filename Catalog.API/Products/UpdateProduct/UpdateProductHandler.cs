@@ -25,7 +25,7 @@ public class UpdateProductCommandValidator : AbstractValidator<UpdateProductComm
     }
 }
 
-public class UpdateProductCommandHandler(IDocumentSession session)
+internal class UpdateProductCommandHandler(IDocumentSession session)
     : ICommandHandler<UpdateProductCommand, UpdateProductResult>
 {
     public async Task<UpdateProductResult> Handle(
