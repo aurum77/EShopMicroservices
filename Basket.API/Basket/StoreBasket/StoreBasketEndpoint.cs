@@ -15,6 +15,13 @@ public class StoreBasketEndpoint(ISender sender) : Endpoint<StoreBasketRequest, 
     {
         Post("/basket/{username}");
         AllowAnonymous();
+        Description(b =>
+            b.WithName("StoreBasket")
+                .Produces<StoreBasketResponse>(StatusCodes.Status201Created)
+                .ProducesProblem(StatusCodes.Status400BadRequest)
+                .WithSummary("Store Basket")
+                .WithDescription("Store Basket")
+        );
     }
 
     public override async Task HandleAsync(StoreBasketRequest req, CancellationToken ct)
