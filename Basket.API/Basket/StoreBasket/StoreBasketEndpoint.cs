@@ -13,7 +13,7 @@ public class StoreBasketEndpoint(ISender sender) : Endpoint<StoreBasketRequest, 
 {
     public override void Configure()
     {
-        Post("/basket/{username}");
+        Post("/basket");
         AllowAnonymous();
         Description(b =>
             b.WithName("StoreBasket")
