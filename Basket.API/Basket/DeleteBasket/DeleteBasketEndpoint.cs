@@ -25,7 +25,7 @@ public class DeleteBasketEndpoint(ISender sender) : Endpoint<DeleteBasketRequest
     public override async Task HandleAsync(DeleteBasketRequest req, CancellationToken ct)
     {
         var command = req.Adapt<DeleteBasketCommand>();
-        var result = sender.Send(command);
+        var result = await sender.Send(command);
         var response = result.Adapt<DeleteBasketResponse>();
 
         await SendAsync(response, StatusCodes.Status200OK, ct);
