@@ -1,3 +1,4 @@
+using Basket.API.Data;
 using Basket.API.Models;
 using BuildingBlocks.Exceptions.Handler;
 using BuildingBlocks.PipelineBehaviors;
@@ -8,7 +9,7 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 var assembly = typeof(Program).Assembly;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssembly(assembly);
