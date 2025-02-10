@@ -33,7 +33,7 @@ public class GetProductsEndpoint(ISender sender) : Endpoint<GetProductsRequest, 
     public override async Task HandleAsync(GetProductsRequest req, CancellationToken ct)
     {
         var query = req.Adapt<GetProductsQuery>();
-        var result = sender.Send(query).Result;
+        var result = await sender.Send(query);
         var response = result.Adapt<GetProductsResponse>();
         await SendAsync(response, StatusCodes.Status200OK, ct);
     }

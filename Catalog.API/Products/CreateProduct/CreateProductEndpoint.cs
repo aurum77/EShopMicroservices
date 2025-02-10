@@ -31,7 +31,7 @@ public class CreateProductEndpoint(ISender sender)
     public override async Task HandleAsync(CreateProductRequest req, CancellationToken ct)
     {
         var command = req.Adapt<CreateProductCommand>();
-        var result = sender.Send(command).Result;
+        var result = await sender.Send(command);
         var response = result.Adapt<CreateProductResponse>();
         await SendAsync(response, StatusCodes.Status201Created, ct);
     }

@@ -27,7 +27,7 @@ public class GetBasketEndpoint(ISender sender) : Endpoint<GetBasketRequest, GetB
     public override async Task HandleAsync(GetBasketRequest req, CancellationToken ct)
     {
         var query = req.Adapt<GetBasketQuery>();
-        var result = sender.Send(query).Result;
+        var result = await sender.Send(query);
         var response = result.Adapt<GetBasketResponse>();
         await SendAsync(response, StatusCodes.Status200OK, ct);
     }

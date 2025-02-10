@@ -25,7 +25,7 @@ public class GetProductByIdEndpoint(ISender sender)
     public override async Task HandleAsync(GetProductByIdRequest req, CancellationToken ct)
     {
         var query = new GetProductByIdQuery(req.Id);
-        var result = sender.Send(query).Result;
+        var result = await sender.Send(query);
         var response = result.Adapt<GetProductByIdResponse>();
         await SendAsync(response, StatusCodes.Status200OK, ct);
     }
