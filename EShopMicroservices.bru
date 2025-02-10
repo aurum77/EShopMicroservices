@@ -4,11 +4,96 @@
   "items": [
     {
       "type": "folder",
-      "name": "Discount"
-    },
-    {
-      "type": "folder",
-      "name": "Basket"
+      "name": "Basket",
+      "items": [
+        {
+          "type": "http",
+          "name": "DeleteBasketByUsername",
+          "seq": 2,
+          "request": {
+            "url": "{{basket_url}}/basket/:username",
+            "method": "DELETE",
+            "headers": [],
+            "params": [
+              {
+                "name": "username",
+                "value": "aurum77",
+                "type": "path",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "GetBasketByUsername",
+          "seq": 1,
+          "request": {
+            "url": "{{basket_url}}/basket/:username",
+            "method": "GET",
+            "headers": [],
+            "params": [
+              {
+                "name": "username",
+                "value": "aurum77",
+                "type": "path",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "StoreBasket",
+          "seq": 3,
+          "request": {
+            "url": "{{basket_url}}/basket/",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n    \"basket\": {\n    \"username\": \"aurum77\",\n    \"items\": [\n      {\n        \"quantity\": 2,\n        \"color\": \"red\",\n        \"price\": 10,\n        \"productId\": \"00000000-0000-0000-0000-000000000001\",\n        \"productName\": \"T-Shirt\",\n        \"guid\": \"a1b2c3d4-e5f6-7890-1234-567890abcdef\"\n      },\n      {\n        \"quantity\": 1,\n        \"color\": \"blue\",\n        \"price\": 5.5,\n        \"productId\": \"00000000-0000-0000-0000-000000000002\",\n        \"productName\": \"Socks\",\n        \"guid\": \"fedcba98-7654-3210-0fed-cba987654321\"\n      },\n      {\n        \"quantity\": 1,\n        \"color\": \"blue\",\n        \"price\": 10,\n        \"productId\": \"00000000-0000-0000-0000-000000000003\",\n        \"productName\": \"Car\",\n        \"guid\": \"fedcba98-7654-3210-0fed-cba987654321\"\n      }\n    ]\n}\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "docs": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        }
+      ]
     },
     {
       "type": "folder",
@@ -137,10 +222,23 @@
           "name": "GetProducts",
           "seq": 2,
           "request": {
-            "url": "{{catalog_url}}/products",
+            "url": "{{catalog_url}}/products?pagenumber=1&pageSize=2",
             "method": "GET",
             "headers": [],
-            "params": [],
+            "params": [
+              {
+                "name": "pagenumber",
+                "value": "1",
+                "type": "query",
+                "enabled": true
+              },
+              {
+                "name": "pageSize",
+                "value": "2",
+                "type": "query",
+                "enabled": true
+              }
+            ],
             "body": {
               "mode": "none",
               "formUrlEncoded": [],
@@ -184,10 +282,14 @@
     },
     {
       "type": "folder",
+      "name": "Discount"
+    },
+    {
+      "type": "folder",
       "name": "Ordering"
     }
   ],
-  "activeEnvironmentUid": "PMKDJ08Fp9jxrcT3KRAJ4",
+  "activeEnvironmentUid": "VybbfqtRsogOZzDRnCBG5",
   "environments": [
     {
       "variables": [
