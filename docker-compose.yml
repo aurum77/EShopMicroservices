@@ -17,6 +17,9 @@ services:
   basketdb:
     image: postgres:alpine
 
+  basketcache:
+    image: redis:alpine
+
 volumes:
   postgres_catalog:
   postgres_basket:

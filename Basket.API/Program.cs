@@ -10,6 +10,7 @@ var assembly = typeof(Program).Assembly;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+builder.Services.Decorate<IBasketRepository, CachedBasketRepository>();
 builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssembly(assembly);
@@ -32,6 +33,11 @@ builder
 builder.Services.AddLogging();
 builder.Services.AddValidatorsFromAssembly(assembly);
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetConnectionString("Redis");
+    //options.InstanceName = "DistributedCache";
+});
 
 var app = builder.Build();
 app.UseHealthChecks(

@@ -32,8 +32,10 @@ services:
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
       - ConnectionStrings__PostgreSQL=Server=basketdb;Port=5433;Database=basketdb;User Id=postgres;Password=1a2b8ousjdlfsdlk;Include Error Detail=true
+      - ConnectionStrings__Redis=basketcache:6379
     depends_on:
       - basketdb
+      - basketcache
     ports:
       - "6001:8080"
       - "6061:8081"
@@ -52,3 +54,9 @@ services:
       - "5433:5432"
     volumes:
       - postgres_basket:/var/lib/postgresql/data/
+
+  basketcache:
+    container_name: basketcache
+    restart: always
+    ports:
+      - "6379:6379"
