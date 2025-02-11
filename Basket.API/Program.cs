@@ -16,7 +16,10 @@ builder.Services.AddMediatR(config =>
     config.AddOpenBehavior(typeof(ValidationBehavior<,>));
     config.AddOpenBehavior(typeof(LoggingBehavior<,>));
 });
-builder.Services.AddHealthChecks();
+builder
+    .Services.AddHealthChecks()
+    .AddNpgSql(builder.Configuration.GetConnectionString("PostgreSQL")!)
+    .AddRedis(builder.Configuration.GetConnectionString("Redis")!);
 builder.Services.AddFastEndpoints();
 builder
     .Services.AddMarten(opts =>
