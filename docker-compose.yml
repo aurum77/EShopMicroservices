@@ -1,21 +1,21 @@
 services:
-  catalogdb:
-    image: postgres:alpine
-
-  basketdb:
-    image: postgres:alpine
-
   catalog.api:
     image: ${DOCKER_REGISTRY-}catalogapi
     build:
       context: .
       dockerfile: Catalog.API/Dockerfile
 
+  catalogdb:
+    image: postgres:alpine
+
   basket.api:
     image: ${DOCKER_REGISTRY-}basketapi
     build:
       context: .
       dockerfile: Basket.API/Dockerfile
+
+  basketdb:
+    image: postgres:alpine
 
 volumes:
   postgres_catalog:
