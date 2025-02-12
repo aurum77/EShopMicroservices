@@ -16,8 +16,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{025C0042-45C3-4CE9-88C2-7F53AF1AAA34}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
-		EShopMicroservices.bru = EShopMicroservices.bru
-		EShopMicroservices.json = EShopMicroservices.json
+		EShopMicroservices.postman_collection.json = EShopMicroservices.postman_collection.json
 	EndProjectSection
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{21DE9C84-9D55-408A-82E7-91F9619FB7B0}"

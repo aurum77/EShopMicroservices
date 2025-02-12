@@ -1,0 +1,325 @@
+{
+	"info": {
+		"_postman_id": "d289f19c-4104-45fc-9be1-d97e0fc2cc41",
+		"name": "EShopMicroservices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15654858"
+	},
+	"item": [
+		{
+			"name": "Basket",
+			"item": [
+				{
+					"name": "DeleteBasketByUsername",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{basket_url}}/basket/:username",
+							"host": [
+								"{{basket_url}}"
+							],
+							"path": [
+								"basket",
+								":username"
+							],
+							"variable": [
+								{
+									"key": "username",
+									"value": "aurum77"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetBasketByUsername",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{basket_url}}/basket/:username",
+							"host": [
+								"{{basket_url}}"
+							],
+							"path": [
+								"basket",
+								":username"
+							],
+							"variable": [
+								{
+									"key": "username",
+									"value": "aurum77"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "StoreBasket",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"basket\": {\n    \"username\": \"aurum77\",\n    \"items\": [\n      {\n        \"quantity\": 2,\n        \"color\": \"red\",\n        \"price\": 10,\n        \"productId\": \"00000000-0000-0000-0000-000000000001\",\n        \"productName\": \"T-Shirt\",\n        \"guid\": \"a1b2c3d4-e5f6-7890-1234-567890abcdef\"\n      },\n      {\n        \"quantity\": 1,\n        \"color\": \"blue\",\n        \"price\": 5.5,\n        \"productId\": \"00000000-0000-0000-0000-000000000002\",\n        \"productName\": \"Socks\",\n        \"guid\": \"fedcba98-7654-3210-0fed-cba987654321\"\n      },\n      {\n        \"quantity\": 1,\n        \"color\": \"blue\",\n        \"price\": 10,\n        \"productId\": \"00000000-0000-0000-0000-000000000003\",\n        \"productName\": \"Car\",\n        \"guid\": \"fedcba98-7654-3210-0fed-cba987654321\"\n      }\n    ]\n}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{basket_url}}/basket/",
+							"host": [
+								"{{basket_url}}"
+							],
+							"path": [
+								"basket",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{basket_url}}/health",
+							"host": [
+								"{{basket_url}}"
+							],
+							"path": [
+								"health"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Catalog",
+			"item": [
+				{
+					"name": "CreateProduct",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Name\": \"New Product A\",\n  \"Category\": [\n    \"c1\",\n    \"c2\",\n    \"c3\"\n  ],\n  \"Description\": \"Description Product A\",\n  \"ImageFile\": \"ImageFile Product A\",\n  \"Price\": 199\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{catalog_url}}/products",
+							"host": [
+								"{{catalog_url}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteProduct",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{catalog_url}}/products/:id",
+							"host": [
+								"{{catalog_url}}"
+							],
+							"path": [
+								"products",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "0193abca-9273-476f-a038-95ab314fec64"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetProductByCategory",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{catalog_url}}/products/by-category/:category",
+							"host": [
+								"{{catalog_url}}"
+							],
+							"path": [
+								"products",
+								"by-category",
+								":category"
+							],
+							"variable": [
+								{
+									"key": "category",
+									"value": "c3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetProductById",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{catalog_url}}/products/:productId",
+							"host": [
+								"{{catalog_url}}"
+							],
+							"path": [
+								"products",
+								":productId"
+							],
+							"variable": [
+								{
+									"key": "productId",
+									"value": "0193abca-9273-476f-a038-95ab314fec64"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetProducts",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{catalog_url}}/products?pagenumber=1&pageSize=2?pagenumber=1&pageSize=2",
+							"host": [
+								"{{catalog_url}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "pagenumber",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateProduct",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{catalog_url}}/products",
+							"host": [
+								"{{catalog_url}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{catalog_url}}/health",
+							"host": [
+								"{{catalog_url}}"
+							],
+							"path": [
+								"health"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Discount",
+			"item": []
+		},
+		{
+			"name": "Ordering",
+			"item": []
+		}
+	],
+	"variable": [
+		{
+			"key": "basket_url",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "catalog_url",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
