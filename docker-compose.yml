@@ -20,6 +20,12 @@ services:
   basketcache:
     image: redis:alpine
 
+  discount.grpc:
+    image: ${DOCKER_REGISTRY-}discountgrpc
+    build:
+      context: .
+      dockerfile: Discount.Grpc/Dockerfile
+
 volumes:
   postgres_catalog:
   postgres_basket:
