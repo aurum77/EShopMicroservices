@@ -2,6 +2,7 @@ using Basket.API.Data;
 using Basket.API.Models;
 using BuildingBlocks.Exceptions.Handler;
 using BuildingBlocks.PipelineBehaviors;
+using Discount.Grpc;
 using FastEndpoints;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -23,13 +24,12 @@ builder
     .AddRedis(builder.Configuration.GetConnectionString("Redis")!);
 builder.Services.AddFastEndpoints();
 builder
-    .Services.AddMarten(opts =>
+    .Services.AddMarten(options =>
     {
-        opts.Connection(builder.Configuration.GetConnectionString("PostgreSQL")!);
-        opts.Schema.For<ShoppingCart>().Identity(x => x.Username);
+        options.Connection(builder.Configuration.GetConnectionString("PostgreSQL")!);
+        options.Schema.For<ShoppingCart>().Identity(x => x.Username);
     })
     .UseLightweightSessions();
-
 builder.Services.AddLogging();
 builder.Services.AddValidatorsFromAssembly(assembly);
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
@@ -37,6 +37,10 @@ builder.Services.AddStackExchangeRedisCache(options =>
 {
     options.Configuration = builder.Configuration.GetConnectionString("Redis");
     //options.InstanceName = "DistributedCache";
+});
+builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(options =>
+{
+    options.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]!);
 });
 
 var app = builder.Build();
