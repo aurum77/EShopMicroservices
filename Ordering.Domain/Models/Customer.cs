@@ -18,5 +18,5 @@ public class Customer : Entity<CustomerId>
         };
 
         return customer;
-    };
+    }
 }
