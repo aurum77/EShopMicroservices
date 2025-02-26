@@ -1,4 +1,6 @@
-﻿namespace Ordering.Domain.ValueObjects;
+﻿using Ordering.Domain.Exceptions;
+
+namespace Ordering.Domain.ValueObjects;
 
 public record CustomerId
 {
@@ -12,7 +14,7 @@ public record CustomerId
 
         if (value == Guid.Empty)
         {
-            throw new CannotUnloadAppDomainException("CustomerId cannot be empty.");
+            throw new DomainException("CustomerId cannot be empty.");
         }
 
         return new CustomerId(value);
