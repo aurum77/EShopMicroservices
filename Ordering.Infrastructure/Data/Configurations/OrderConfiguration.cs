@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Ordering.Domain.Enums;
 using Ordering.Domain.Models;
 using Ordering.Domain.ValueObjects;
 
@@ -44,5 +45,27 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
                 addressBuilder.Property(a => a.ZipCode).HasMaxLength(5).IsRequired();
             }
         );
+
+        builder.ComplexProperty(
+            o => o.Payment,
+            paymentBuilder =>
+            {
+                paymentBuilder.Property(p => p.CardName).HasMaxLength(50);
+                paymentBuilder.Property(p => p.CardNumber).HasMaxLength(24).IsRequired();
+                paymentBuilder.Property(p => p.Expiration).HasMaxLength(10);
+                paymentBuilder.Property(p => p.CVV).HasMaxLength(3);
+                paymentBuilder.Property(p => p.PaymentMethod);
+            }
+        );
+
+        builder
+            .Property(o => o.Status)
+            .HasDefaultValue(OrderStatus.Draft)
+            .HasConversion(
+                s => s.ToString(),
+                dbStatus => (OrderStatus)Enum.Parse(typeof(OrderStatus), dbStatus)
+            );
+
+        builder.Property(o => o.TotalPrice);
     }
 }
