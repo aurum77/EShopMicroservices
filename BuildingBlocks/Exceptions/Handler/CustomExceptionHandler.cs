@@ -27,6 +27,12 @@ public class CustomExceptionHandler(ILogger<CustomExceptionHandler> logger) : IE
                 exception.GetType().Name,
                 httpContext.Response.StatusCode = StatusCodes.Status400BadRequest
             ),
+            ValidationException =>
+            (
+                exception.Message,
+                exception.GetType().Name,
+                httpContext.Response.StatusCode = StatusCodes.Status400BadRequest
+            ),
             InternalServerException => (
                 exception.Message,
                 exception.GetType().Name,
@@ -57,7 +63,6 @@ public class CustomExceptionHandler(ILogger<CustomExceptionHandler> logger) : IE
         if (exception is ValidationException validationException)
         {
             problemDetails.Extensions.Add("ValidationErrors", validationException.Errors);
-            httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
         }
 
         await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
