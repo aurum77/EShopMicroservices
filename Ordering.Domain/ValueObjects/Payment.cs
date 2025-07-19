@@ -11,7 +11,7 @@ public record Payment
     protected Payment() { }
 
     private Payment(
-        string? cardName,
+        string cardName,
         string cardNumber,
         string expiration,
         string cvv,
@@ -26,7 +26,7 @@ public record Payment
     }
 
     public static Payment Of(
-        string? cardName,
+        string cardName,
         string cardNumber,
         string expiration,
         string cvv,

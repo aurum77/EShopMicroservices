@@ -10,13 +10,12 @@ public record Address
     public string State { get; } = default!;
     public string ZipCode { get; } = default!;
 
-    // Needed for EF Core
     protected Address() { }
 
     private Address(
         string firstName,
         string lastName,
-        string? emailAddress,
+        string emailAddress,
         string addressLine,
         string country,
         string state,
@@ -35,7 +34,7 @@ public record Address
     public static Address Of(
         string firstName,
         string lastName,
-        string? emailAddress,
+        string emailAddress,
         string addressLine,
         string country,
         string state,

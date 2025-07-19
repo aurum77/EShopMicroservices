@@ -14,7 +14,7 @@ public class Customer : Entity<CustomerId>
         {
             Id = id,
             Name = name,
-            Email = email
+            Email = email,
         };
 
         return customer;
