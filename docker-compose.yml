@@ -3,7 +3,7 @@ services:
     image: ${DOCKER_REGISTRY-}catalogapi
     build:
       context: .
-      dockerfile: Catalog.API/Dockerfile
+      dockerfile: src/Services/Catalog/Catalog.API/Dockerfile
 
   catalogdb:
     image: postgres:alpine
@@ -12,7 +12,7 @@ services:
     image: ${DOCKER_REGISTRY-}basketapi
     build:
       context: .
-      dockerfile: Basket.API/Dockerfile
+      dockerfile: src/Services/Basket/Basket.API/Dockerfile
 
   basketdb:
     image: postgres:alpine
@@ -24,7 +24,7 @@ services:
     image: ${DOCKER_REGISTRY-}discountgrpc
     build:
       context: .
-      dockerfile: Discount.Grpc/Dockerfile
+      dockerfile: src/Services/Discount/Discount.Grpc/Dockerfile
 
 volumes:
   postgres_catalog:
