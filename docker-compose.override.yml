@@ -32,11 +32,11 @@ services:
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
       - ConnectionStrings__PostgreSQL=Server=basketdb;Port=5432;Database=basketdb;User Id=postgres;Password=1a2b8ousjdlfsdlk;Include Error Detail=true
-      - ConnectionStrings__Redis=basketcache:6379
+      - ConnectionStrings__Redis=distributedcache:6379
       - GrpcSettings__DiscountUrl=https://discount.grpc:8081
     depends_on:
       - basketdb
-      - basketcache
+      - distributedcache
       - discount.grpc
     ports:
       - "6001:8080"
@@ -57,8 +57,8 @@ services:
     volumes:
       - postgres_basket:/var/lib/postgresql/data/
 
-  basketcache:
-    container_name: basketcache
+  distributedcache:
+    container_name: distributedcache
     restart: always
     ports:
       - "6379:6379"

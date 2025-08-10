@@ -17,7 +17,7 @@ services:
   basketdb:
     image: postgres:alpine
 
-  basketcache:
+  distributedcache:
     image: redis:alpine
 
   discount.grpc:
