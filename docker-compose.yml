@@ -26,6 +26,9 @@ services:
       context: .
       dockerfile: src/Services/Discount/Discount.Grpc/Dockerfile
 
+  orderdb:
+    image: mcr.microsoft.com/mssql/server:2025-latest
+
 volumes:
   postgres_catalog:
   postgres_basket:
