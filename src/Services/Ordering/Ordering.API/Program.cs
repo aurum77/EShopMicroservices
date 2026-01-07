@@ -1,20 +1,22 @@
 using Ordering.API;
+using Ordering.Application;
 using Ordering.Infrastructure;
 using Ordering.Infrastructure.Data.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
-var configuration = builder.Configuration;
 
-// Add services to DI container
-builder.Services.AddInfrastructureServices(configuration);
+// Add services to the container.
+builder.Services
+    .AddInfrastructureServices(builder.Configuration);
 
 var app = builder.Build();
 
-// Configure the request pipeline
+// Configure the HTTP request pipeline.
+app.UseApiServices();
 
 if (app.Environment.IsDevelopment())
 {
-    await app.InitializeDatabaseAsync();
+    await app.InitialiseDatabaseAsync();
 }
 
 app.Run();
