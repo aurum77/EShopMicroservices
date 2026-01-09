@@ -6,7 +6,6 @@ public record AddressDto
     string LastName,
     string EmailAddress,
     string AddressLine,
-    string City,
     string State,
     string Country,
     string ZipCode

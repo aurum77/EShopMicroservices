@@ -7,7 +7,7 @@ public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<Applicatio
     public ApplicationDbContext CreateDbContext(string[] args)
     {
         DbContextOptionsBuilder<ApplicationDbContext> dbContextOptionsBuilder = new();
-        dbContextOptionsBuilder.UseSqlServer("Server=localhost;Database=OrderDb;User Id=sa;Password=123lkjsalkjal.dla;Encrypt=False; TrustServerCertificate=True");
+        dbContextOptionsBuilder.UseSqlServer("Server=localhost;Database=OrderDb;User Id=sa;Password=SwN12345678;Encrypt=False; TrustServerCertificate=True");
         return new(dbContextOptionsBuilder.Options);
     }
 }

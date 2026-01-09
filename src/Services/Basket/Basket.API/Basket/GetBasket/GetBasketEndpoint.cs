@@ -1,7 +1,5 @@
 ﻿using Basket.API.Models;
 using FastEndpoints;
-using Mapster;
-using MediatR;
 
 namespace Basket.API.Basket.GetBasket;
 
