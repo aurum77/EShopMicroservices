@@ -48,6 +48,6 @@ public class LoggingBehavior<TRequest, TResponse>(
             timeElapsed
         );
 
-        return await next();
+        return response;
     }
 }

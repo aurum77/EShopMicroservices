@@ -1,6 +1,7 @@
 using Basket.API.Data;
 using Basket.API.Models;
 using BuildingBlocks.Exceptions.Handler;
+using BuildingBlocks.Messaging.MassTransit;
 using BuildingBlocks.PipelineBehaviors;
 using Discount.Grpc;
 using FastEndpoints;
@@ -32,6 +33,7 @@ builder
     .UseLightweightSessions();
 builder.Services.AddLogging();
 builder.Services.AddValidatorsFromAssembly(assembly);
+builder.Services.AddMessageBroker(builder.Configuration);
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 builder.Services.AddStackExchangeRedisCache(options =>
 {
